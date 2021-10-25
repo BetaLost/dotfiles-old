@@ -280,14 +280,15 @@ function theme.at_screen_connect(s)
             arrow(theme.bg_normal, color1),
             wibox.container.background(wibox.container.margin(wibox.widget { cpuicon, cpu.widget, layout = wibox.layout.align.horizontal }, dpi(3), dpi(3), dpi(3), dpi(3)), color1),
             
-            -- MEM
-            arrow(color1, color2),
-            wibox.container.background(wibox.container.margin(wibox.widget { memicon, mem.widget, layout = wibox.layout.align.horizontal }, dpi(4), dpi(4), dpi(4), dpi(4)), color2),
-            
             -- CPU Temp
+            arrow(color1, color2),
+            wibox.container.background(wibox.container.margin(wibox.widget { tempicon, temp.widget, layout = wibox.layout.align.horizontal }, dpi(3), dpi(3), dpi(1), dpi(1)), color2),
+           
+            -- MEM
             arrow(color2, color3),
-            wibox.container.background(wibox.container.margin(wibox.widget { tempicon, temp.widget, layout = wibox.layout.align.horizontal }, dpi(3), dpi(3), dpi(1), dpi(1)), color3),
-            
+            wibox.container.background(wibox.container.margin(wibox.widget { memicon, mem.widget, layout = wibox.layout.align.horizontal }, dpi(6), dpi(6), dpi(4), dpi(4)), color3),
+
+
             -- Battery
             arrow(color3, color4),
             wibox.container.background(wibox.container.margin(wibox.widget { baticon, bat.widget, layout = wibox.layout.align.horizontal }, dpi(3), dpi(3)), color4),
