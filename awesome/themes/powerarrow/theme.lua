@@ -94,6 +94,15 @@ theme.titlebar_maximized_button_normal_inactive = theme.dir .. "/icons/titlebar/
 local markup = lain.util.markup
 local separators = lain.util.separators
 
+local color1 = "#27499a"
+local color2 = "#e94f67"
+local color3 = "#fad770"
+local color4 = "#fd946a"
+local color5 = "#04bbb4"
+local color6 = "#2856b8"
+local color7 = "#09064f"
+local color8 = "#5e1b61"
+
 -- Taskwarrior
 local task = wibox.widget.imagebox(theme.widget_task)
 lain.widget.contrib.task.attach(task, {
@@ -268,39 +277,39 @@ function theme.at_screen_connect(s)
             -- wibox.container.background(wibox.container.margin(task, dpi(3), dpi(7)), "#343434"),
 
             -- CPU
-            arrow(theme.bg_normal, "#27499a"),
-            wibox.container.background(wibox.container.margin(wibox.widget { cpuicon, cpu.widget, layout = wibox.layout.align.horizontal }, dpi(3), dpi(3), dpi(3), dpi(3)), "#27499a"),
+            arrow(theme.bg_normal, color1),
+            wibox.container.background(wibox.container.margin(wibox.widget { cpuicon, cpu.widget, layout = wibox.layout.align.horizontal }, dpi(3), dpi(3), dpi(3), dpi(3)), color1),
             
             -- MEM
-            arrow("#27499a", "#e94f67"),
-            wibox.container.background(wibox.container.margin(wibox.widget { memicon, mem.widget, layout = wibox.layout.align.horizontal }, dpi(4), dpi(4), dpi(4), dpi(4)), "#e94f67"),
+            arrow(color1, color2),
+            wibox.container.background(wibox.container.margin(wibox.widget { memicon, mem.widget, layout = wibox.layout.align.horizontal }, dpi(4), dpi(4), dpi(4), dpi(4)), color2),
             
             -- CPU Temp
-            arrow("#e94f67", "#fad770"),
-            wibox.container.background(wibox.container.margin(wibox.widget { tempicon, temp.widget, layout = wibox.layout.align.horizontal }, dpi(3), dpi(3), dpi(1), dpi(1)), "#fad770"),
+            arrow(color2, color3),
+            wibox.container.background(wibox.container.margin(wibox.widget { tempicon, temp.widget, layout = wibox.layout.align.horizontal }, dpi(3), dpi(3), dpi(1), dpi(1)), color3),
             
             -- Battery
-            arrow("#fad770", "#fd946a"),
-            wibox.container.background(wibox.container.margin(wibox.widget { baticon, bat.widget, layout = wibox.layout.align.horizontal }, dpi(3), dpi(3)), "#fd946a"),
+            arrow(color3, color4),
+            wibox.container.background(wibox.container.margin(wibox.widget { baticon, bat.widget, layout = wibox.layout.align.horizontal }, dpi(3), dpi(3)), color4),
             
             -- Volume
-            arrow("#fd946a", "#04bbb4"),
-            wibox.container.background(wibox.container.margin(wibox.widget { volicon, theme.volume.widget, layout = wibox.layout.align.horizontal }, dpi(3), dpi(3), dpi(3), dpi(3)), "#04bbb4"),
+            arrow(color4, color5),
+            wibox.container.background(wibox.container.margin(wibox.widget { volicon, theme.volume.widget, layout = wibox.layout.align.horizontal }, dpi(3), dpi(3), dpi(3), dpi(3)), color5),
             
             -- Brightness
-            arrow("#04bbb4", "#2856b8"),
-            wibox.container.background(wibox.container.margin(wibox.widget { brighticon, brightwidget, layout = wibox.layout.align.horizontal }, dpi(3), dpi(3), dpi(3), dpi(3)), "#2856b8"),
+            arrow(color5, color6),
+            wibox.container.background(wibox.container.margin(wibox.widget { brighticon, brightwidget, layout = wibox.layout.align.horizontal }, dpi(3), dpi(3), dpi(3), dpi(3)), color6),
 
             -- Network
-            arrow("#2856b8", "#09064f"),
-            wibox.container.background(wibox.container.margin(wibox.widget { nil, neticon, net.widget, layout = wibox.layout.align.horizontal }, dpi(3), dpi(3), dpi(2), dpi(2)), "#09064f"),
+            arrow(color6, color7),
+            wibox.container.background(wibox.container.margin(wibox.widget { nil, neticon, net.widget, layout = wibox.layout.align.horizontal }, dpi(3), dpi(3), dpi(2), dpi(2)), color7),
 
 	    -- Time
-            arrow("#09064f", "#5e1b61"),
-            wibox.container.background(wibox.container.margin(wibox.widget { format = '%a, %d %b %H:%M ', widget = wibox.widget.textclock }, dpi(3), dpi(3)), "#5e1b61"),
+            arrow(color7, color8),
+            wibox.container.background(wibox.container.margin(wibox.widget { format = '%a, %d %b %H:%M ', widget = wibox.widget.textclock }, dpi(3), dpi(3)), color8),
 
 
-            arrow("#5e1b61", "alpha"),
+            arrow(color8, "alpha"),
             --]]
             s.mylayoutbox,
         },
