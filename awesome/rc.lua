@@ -187,7 +187,7 @@ screen.connect_signal("property::geometry", function(s)
     -- Wallpaper
     if beautiful.wallpaper then
         local wallpaper = beautiful.wallpaper
-	awful.spawn.with_shell("feh --bg-scale themes/powerarrow/wall.png")
+	awful.spawn.with_shell("feh --bg-scale $HOME/.config/awesome/themes/powerarrow/wall.png")
         -- If wallpaper is a function, call it with the screen
         if type(wallpaper) == "function" then
             wallpaper = wallpaper(s)
