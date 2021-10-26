@@ -184,19 +184,10 @@ end)
 
 -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
 screen.connect_signal("property::geometry", function(s)
-    -- Wallpaper
-    if beautiful.wallpaper then
-        local wallpaper = beautiful.wallpaper
-	awful.spawn.with_shell("feh --bg-scale $HOME/.config/awesome/themes/powerarrow/wall.png")
-        -- If wallpaper is a function, call it with the screen
-        if type(wallpaper) == "function" then
-            wallpaper = wallpaper(s)
-        end
-        gears.wallpaper.maximized(wallpaper, s, true)
-    end
+    awful.spawn.with_shell("$HOME/.config/awesome/themes/powerarrow/s_wall.sh")
 end)
 
-awful.spawn.with_shell("feh --bg-scale $HOME/.config/awesome/themes/powerarrow/wall.png")
+awful.spawn.with_shell("$HOME/.config/awesome/themes/powerarrow/s_wall.sh")
 
 -- No borders when rearranging only 1 non-floating or maximized client
 screen.connect_signal("arrange", function (s)
@@ -248,8 +239,7 @@ globalkeys = gears.table.join(
         end,
         {description = "focus previous by index", group = "client"}
     ),
-    -- awful.key({ modkey,           }, "w", function () mymainmenu:show() end,
-              -- {description = "show main menu", group = "awesome"}),
+
     -- Brightness
     awful.key({}, "XF86MonBrightnessDown", function () awful.spawn("light -U 5") end),
 
@@ -326,8 +316,7 @@ globalkeys = gears.table.join(
               {description = "restore minimized", group = "client"}),
 
     -- Prompt
-    awful.key({ modkey }, "r", function() os.execute(string.format("dmenu_run -i -fn '%s' -nb '%s' -nf '%s' -sb '%s' -sf '%s'", beautiful.font, beautiful.bg_normal, beautiful.fg_normal, beautiful.bg_focus, beautiful.fg_focus)) end,
-              {description = "run prompt", group = "launcher"}),
+    -- awful.key({ modkey }, "r", function() os.execute(string.format("dmenu_run -i -fn '%s' -nb '%s' -nf '%s' -sb '%s' -sf '%s'", beautiful.font, beautiful.bg_normal, beautiful.fg_normal, beautiful.bg_focus, beautiful.fg_focus)) end,
 
     -- Browser
     awful.key({ modkey }, "b", function() awful.util.spawn("brave") end, 
@@ -335,8 +324,11 @@ globalkeys = gears.table.join(
 
     -- Menubar
     awful.key({ modkey }, "p", function() menubar.show() end,
-              {description = "show the menubar", group = "launcher"})
-    
+              {description = "show the menubar", group = "launcher"}),
+   
+    -- Show/hide system tray
+    awful.key({ modkey }, "=", function () awful.screen.focused().systray.visible = not awful.screen.focused().systray.visible end)
+
 	      --[[
     -- Show/hide wibox
     awful.key({ modkey }, "h", function ()
@@ -615,8 +607,6 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 
 -- }}}
 
--- Gaps
-beautiful.useless_gap = 5
-
 awful.spawn.with_shell("picom")
 awful.spawn.with_shell("nm-applet")
+awful.spawn.with_shell(string.format("echo %s > $HOME/output.txt", beautiful.font))
