@@ -75,7 +75,6 @@ theme.widget_temp                               = theme.dir .. "/icons/temp.png"
 theme.widget_net                                = theme.dir .. "/icons/net.png"
 theme.widget_hdd                                = theme.dir .. "/icons/hdd.png"
 theme.widget_vol                                = theme.dir .. "/icons/vol.png"
-theme.widget_vol_no                             = theme.dir .. "/icons/vol_no.png"
 theme.widget_vol_mute                           = theme.dir .. "/icons/vol_mute.png"
 theme.widget_task                               = theme.dir .. "/icons/task.png"
 theme.tasklist_plain_task_name                  = true
@@ -162,27 +161,24 @@ local bat = lain.widget.bat({
     end
 })
 
--- ALSA volume
+-- Volume
+
 local volicon = wibox.widget.imagebox(theme.widget_vol)
-theme.volume = lain.widget.alsa({
-    settings = function()
-        if volume_now.status == "off" then
-            volume_now.level = volume_now.level .. "M"
-        end
+local volumewidget = awful.widget.watch("bash -c \"pulsemixer --get-volume | awk '{print $1}'\"", 0.1,
+    function(widget, stdout)
+	local volume_level = tonumber(stdout)
+        widget:set_markup(markup.font(theme.font, " " .. volume_level .. "%"))
+        
+        local handle = io.popen("pulsemixer --get-mute")
+	local mute_status = handle:read("*l")
+	handle:close()
 
-        widget:set_markup(markup.fontfg(theme.font, "#FFFFFF", " " .. volume_now.level .. "% "))
-        volicon:set_image(theme.widget_vol)
-    end
-})
-
--- Net
-local neticon = wibox.widget.imagebox(theme.widget_net)
-local net = lain.widget.net({
-    settings = function()
-        widget:set_markup(markup.fontfg(theme.font, "#FEFEFE", " " .. net_now.received .. " ↓↑ " .. net_now.sent .. " "))
-	neticon:set_image(theme.widget_net)
-    end
-})
+	if mute_status == "1" then
+	    volicon:set_image(theme.widget_vol_mute)
+	elseif mute_status == "0" then
+            volicon:set_image(theme.widget_vol)
+	end
+end)
 
 -- Brigtness
 local brighticon = wibox.widget.imagebox(theme.widget_brightness)
@@ -192,6 +188,15 @@ local brightwidget = awful.widget.watch('light -G', 0.1,
         widget:set_markup(markup.font(theme.font, " " .. brightness_level .. "%"))
         brighticon:set_image(theme.widget_brightness)
 end)
+
+-- Net
+local neticon = wibox.widget.imagebox(theme.widget_net)
+local net = lain.widget.net({
+    settings = function()
+        widget:set_markup(markup.fontfg(theme.font, "#FEFEFE", " " .. net_now.received .. " ↓↑ " .. net_now.sent .. " "))
+	neticon:set_image(theme.widget_net)
+    end
+})
 
 -- Separators
 local arrow = separators.arrow_left
@@ -276,7 +281,7 @@ function theme.at_screen_connect(s)
             
             -- CPU Temp
             arrow(color1, color2),
-            wibox.container.background(wibox.container.margin(wibox.widget { tempicon, temp.widget, layout = wibox.layout.align.horizontal }, dpi(3), dpi(3), dpi(1), dpi(1)), color2),
+            wibox.container.background(wibox.container.margin(wibox.widget { tempicon, temp.widget, layout = wibox.layout.align.horizontal }, dpi(3), dpi(3), dpi(0), dpi(0)), color2),
            
             -- MEM
             arrow(color2, color3),
@@ -289,8 +294,8 @@ function theme.at_screen_connect(s)
             
             -- Volume
             arrow(color4, color5),
-            wibox.container.background(wibox.container.margin(wibox.widget { volicon, theme.volume.widget, layout = wibox.layout.align.horizontal }, dpi(3), dpi(3), dpi(3), dpi(3)), color5),
-            
+            wibox.container.background(wibox.container.margin(wibox.widget { volicon, volumewidget, layout = wibox.layout.align.horizontal }, dpi(3), dpi(3), dpi(3), dpi(3)), color5),
+
             -- Brightness
             arrow(color5, color6),
             wibox.container.background(wibox.container.margin(wibox.widget { brighticon, brightwidget, layout = wibox.layout.align.horizontal }, dpi(3), dpi(3), dpi(3), dpi(3)), color6),
