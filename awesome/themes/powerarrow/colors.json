@@ -1,0 +1,28 @@
+{
+    "wallpaper": "/home/chief/.config/awesome/themes/powerarrow/wallpapers/021.png",
+    "alpha": "100",
+
+    "special": {
+        "background": "#0c0c0f",
+        "foreground": "#f0dcca",
+        "cursor": "#f0dcca"
+    },
+    "colors": {
+        "color0": "#0c0c0f",
+        "color1": "#89563D",
+        "color2": "#9E6758",
+        "color3": "#CB7557",
+        "color4": "#BA8374",
+        "color5": "#E0926A",
+        "color6": "#886C82",
+        "color7": "#f0dcca",
+        "color8": "#a89a8d",
+        "color9": "#89563D",
+        "color10": "#9E6758",
+        "color11": "#CB7557",
+        "color12": "#BA8374",
+        "color13": "#E0926A",
+        "color14": "#886C82",
+        "color15": "#f0dcca"
+    }
+}
