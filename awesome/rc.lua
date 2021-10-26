@@ -73,7 +73,7 @@ awful.util.terminal = terminal
 awful.util.tagnames = { "1", "2", "3", "4", "5" }
 awful.layout.layouts = {
     awful.layout.suit.tile,
-    awful.layout.suit.floating,
+    --awful.layout.suit.floating,
     --awful.layout.suit.tile.left,
     --awful.layout.suit.tile.bottom,
     --awful.layout.suit.tile.top,
@@ -206,6 +206,21 @@ awful.screen.connect_for_each_screen(function(s) beautiful.at_screen_connect(s) 
 
 -- }}}
 
+-- Mute function
+function mute()
+    os.execute("pulsemixer --toggle-mute")
+    local handle = io.popen("pulsemixer --get-mute")
+    local mute_status = handle:read("*l")
+    handle:close()
+
+    local led = "/sys/class/leds/hda::mute/brightness"
+    if mute_status == "0" then
+	os.execute("echo 0 > " .. led)
+    elseif mute_status == "1" then
+	os.execute("echo 1 > " .. led)
+    end
+end
+
 -- {{{ Mouse bindings
 
 root.buttons(mytable.join(
@@ -243,21 +258,14 @@ globalkeys = gears.table.join(
     -- Brightness
     awful.key({}, "XF86MonBrightnessDown", function () awful.spawn("light -U 5") end),
 
-    awful.key({}, "XF86MonBrightnessUp", function () awful.spawn("light -A 5") end),
+    awful.key({}, "XF86MonBrightnessUp", function () awful.spawn("light -a 5") end),
 
     -- Volume
-    awful.key({ }, "XF86AudioRaiseVolume", function ()
-	    os.execute(string.format("amixer -q set %s 1%%+", beautiful.volume.channel))
-            beautiful.volume.update() end),
-
-    awful.key({ }, "XF86AudioLowerVolume", function ()
-	    os.execute(string.format("amixer -q set %s 1%%-", beautiful.volume.channel))
-            beautiful.volume.update() end),
-
-    awful.key({ }, "XF86AudioMute", function ()
-	    os.execute(string.format("amixer -q set %s toggle", beautiful.volume.togglechannel or beautiful.volume.channel))
-            beautiful.volume.update() end),
-
+    awful.key({}, "XF86AudioRaiseVolume", function () awful.util.spawn("pulsemixer --change-volume +1") end),
+    awful.key({}, "XF86AudioLowerVolume", function () awful.util.spawn("pulsemixer --change-volume -1") end),
+    -- awful.key({}, "XF86AudioMute", function () awful.util.spawn("pulsemixer --toggle-mute") end),
+    awful.key({}, "XF86AudioMute", function () awful.util.spawn(mute()) end),
+    
     -- Layout manipulation
     awful.key({ modkey, "Shift" }, "Right", function () awful.client.swap.byidx(  1)    end,
               {description = "swap with next client by index", group = "client"}),
