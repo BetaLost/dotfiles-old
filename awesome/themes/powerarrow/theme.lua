@@ -14,18 +14,27 @@ local dpi   = require("beautiful.xresources").apply_dpi
 local math, string, os = math, string, os
 local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
 
+local color1 = "#27499a"
+local color2 = "#e94f67"
+local color3 = "#fad770"
+local color4 = "#fd946a"
+local color5 = "#04bbb4"
+local color6 = "#2856b8"
+local color7 = "#09064f"
+local color8 = "#5e1b61"
+local opacity = "70"
+
 local theme                                     = {}
 theme.dir                                       = "~/.config/awesome/themes/powerarrow"
-theme.wallpaper                                 = theme.dir .. "wall.png"
 theme.font                                      = "Fira Sans Semibold 12"
 theme.fg_normal                                 = "#FEFEFE"
 theme.fg_focus                                  = "#e94f67"
 theme.fg_urgent                                 = "#C83F11"
-theme.bg_normal                                 = "#222222"
-theme.bg_focus                                  = "#1E2320"
-theme.bg_urgent                                 = "#3F3F3F"
+theme.bg_normal                                 = "#222222" .. opacity
+theme.bg_focus                                  = "#1E2320" .. opacity
+theme.bg_urgent                                 = "#3F3F3F" .. opacity
 theme.taglist_fg_focus                          = "#e94f67"
-theme.tasklist_bg_focus                         = "#222222"
+theme.tasklist_bg_focus                         = "#222222" .. opacity
 theme.tasklist_fg_focus                         = "#e94f67"
 theme.border_width                              = dpi(2)
 theme.border_normal                             = "#3F3F3F"
@@ -68,10 +77,9 @@ theme.widget_vol                                = theme.dir .. "/icons/vol.png"
 theme.widget_vol_no                             = theme.dir .. "/icons/vol_no.png"
 theme.widget_vol_mute                           = theme.dir .. "/icons/vol_mute.png"
 theme.widget_task                               = theme.dir .. "/icons/task.png"
-theme.widget_scissors                           = theme.dir .. "/icons/scissors.png"
 theme.tasklist_plain_task_name                  = true
 theme.tasklist_disable_icon                     = false
-theme.useless_gap                               = 0
+theme.useless_gap                               = 5
 theme.titlebar_close_button_focus               = theme.dir .. "/icons/titlebar/close_focus.png"
 theme.titlebar_close_button_normal              = theme.dir .. "/icons/titlebar/close_normal.png"
 theme.titlebar_ontop_button_focus_active        = theme.dir .. "/icons/titlebar/ontop_focus_active.png"
@@ -94,15 +102,6 @@ theme.titlebar_maximized_button_normal_inactive = theme.dir .. "/icons/titlebar/
 local markup = lain.util.markup
 local separators = lain.util.separators
 
-local color1 = "#27499a"
-local color2 = "#e94f67"
-local color3 = "#fad770"
-local color4 = "#fd946a"
-local color5 = "#04bbb4"
-local color6 = "#2856b8"
-local color7 = "#09064f"
-local color8 = "#5e1b61"
-
 -- Taskwarrior
 local task = wibox.widget.imagebox(theme.widget_task)
 lain.widget.contrib.task.attach(task, {
@@ -110,10 +109,6 @@ lain.widget.contrib.task.attach(task, {
     show_cmd = "task | sed -r 's/\\x1B\\[([0-9]{1,2}(;[0-9]{1,2})?)?[mGK]//g'"
 })
 task:buttons(my_table.join(awful.button({}, 1, lain.widget.contrib.task.prompt)))
-
--- Scissors (xsel copy and paste)
-local scissors = wibox.widget.imagebox(theme.widget_scissors)
-scissors:buttons(my_table.join(awful.button({}, 1, function() awful.spawn.with_shell("xsel | xsel -i -b") end)))
 
 -- CPU
 local cpuicon = wibox.widget.imagebox(theme.widget_cpu)
@@ -227,18 +222,16 @@ function theme.at_screen_connect(s)
     -- Quake application
     s.quake = lain.util.quake({ app = awful.util.terminal })
 
-    -- If wallpaper is a function, call it with the screen
-    local wallpaper = theme.wallpaper
-    if type(wallpaper) == "function" then
-        wallpaper = wallpaper(s)
-    end
-    gears.wallpaper.maximized(wallpaper, s, true)
-
     -- Tags
     awful.tag(awful.util.tagnames, s, awful.layout.layouts)
 
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
+
+    -- Create system tray
+    s.systray = wibox.widget.systray()
+    s.systray.visible = false
+    
     -- Create an imagebox widget which will contains an icon indicating which layout we're using.
     -- We need one layoutbox per screen.
     s.mylayoutbox = awful.widget.layoutbox(s)
@@ -255,7 +248,7 @@ function theme.at_screen_connect(s)
     s.mytasklist = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, awful.util.tasklist_buttons)
 
     -- Create the wibox
-    s.mywibox = awful.wibar({ position = "top", screen = s, height = dpi(22), bg = theme.bg_normal, fg = theme.fg_normal })
+    s.mywibox = awful.wibar({ position = "top", screen = s, height = dpi(22), bg = theme.bg_normal .. "11", fg = theme.fg_normal })
 
     -- Add widgets to the wibox
     s.mywibox:setup {
@@ -270,8 +263,8 @@ function theme.at_screen_connect(s)
         s.mytasklist, -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
-            wibox.widget.systray(),
-            wibox.container.margin(scissors, dpi(4), dpi(8)),
+	    wibox.container.margin(s.systray, dpi(0), dpi(0)),
+
             -- using separators
             -- arrow(theme.bg_normal, "#343434"),
             -- wibox.container.background(wibox.container.margin(task, dpi(3), dpi(7)), "#343434"),
