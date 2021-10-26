@@ -4,7 +4,6 @@
 theme_dir="$HOME/.config/awesome/themes/powerarrow"
 
 rm $theme_dir/theme.lua
-rm $theme_dir/colors.json
 
 file=$(ls -1 $theme_dir/wallpapers/ | sort --random-sort | head -1)
 feh --bg-scale $theme_dir/wallpapers/$file
@@ -25,3 +24,5 @@ get_color 3
 get_color 4
 get_color 5
 get_color 6
+
+rm $theme_dir/colors.json
