@@ -18,7 +18,7 @@ get_color() {
 	color=$(jq .colors.color$1 $theme_dir/colors.json)
 	if [[ $2 == "rofi" ]]; then
 	    nq_color=$(echo $color | tr -d '"')
-	    sed -i "s/c$1/$nq_color/g" $HOME/.config/rofi/theme.rasi 
+	    sed -i "s/c$1/$nq_color/g" $rofi_theme
 	else
 	    sed -i "s/c$1/$color/g" $theme_dir/theme.lua
 	fi
