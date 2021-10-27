@@ -263,6 +263,7 @@ globalkeys = gears.table.join(
     -- Volume
     awful.key({}, "XF86AudioRaiseVolume", function () awful.util.spawn("pulsemixer --change-volume +1") end),
     awful.key({}, "XF86AudioLowerVolume", function () awful.util.spawn("pulsemixer --change-volume -1") end),
+    -- awful.key({}, "XF86AudioMute", function () awful.util.spawn("pulsemixer --toggle-mute") end),
     awful.key({}, "XF86AudioMute", function () awful.util.spawn(mute()) end),
     
     -- Layout manipulation
@@ -323,7 +324,8 @@ globalkeys = gears.table.join(
               {description = "restore minimized", group = "client"}),
 
     -- Prompt
-    awful.key({ modkey }, "r", function() awful.util.spawn("rofi -show run") end),
+    -- awful.key({ modkey }, "r", function() os.execute(string.format("dmenu_run -i -fn '%s' -nb '%s' -nf '%s' -sb '%s' -sf '%s'", beautiful.font, beautiful.bg_normal, beautiful.fg_normal, beautiful.bg_focus, beautiful.fg_focus)) end,
+    awful.key({ modkey }, "r", function() awful.util.spawn("rofi -show drun") end),
 
     -- Browser
     awful.key({ modkey }, "b", function() awful.util.spawn("brave") end, 
