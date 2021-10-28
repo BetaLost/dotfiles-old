@@ -34,7 +34,8 @@ theme.fg_urgent                                 = "#C83F11"
 theme.bg_normal                                 = "#222222" .. opacity
 theme.bg_focus                                  = "#1E2320" .. opacity
 theme.bg_urgent                                 = "#3F3F3F" .. opacity
-theme.taglist_fg_focus                          = c3
+theme.taglist_bg_focus                          = c3
+theme.taglist_fg_focus                          = theme.fg_normal
 theme.tasklist_bg_focus                         = "#222222" .. opacity
 theme.tasklist_fg_focus                         = c3
 theme.border_width                              = dpi(2)
@@ -193,7 +194,7 @@ end)
 local neticon = wibox.widget.imagebox(theme.widget_net)
 local net = lain.widget.net({
     settings = function()
-        widget:set_markup(markup.fontfg(theme.font, "#FEFEFE", " " .. net_now.received .. " ↓↑ " .. net_now.sent .. " "))
+        widget:set_markup(markup.fontfg(theme.font, "#FEFEFE", " " .. net_now.received .. " KiB" .. " ↓↑ " .. net_now.sent .. " KiB "))
 	neticon:set_image(theme.widget_net)
     end
 })
