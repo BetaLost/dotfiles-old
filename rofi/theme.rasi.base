@@ -4,7 +4,7 @@
     columns: 2;
     scrollbar: false;
 
-    background-color: #22222280;
+    background-color: #22222250;
     selected-normal-background: c1;
     selected-normal-foreground: #ffffff;
 
@@ -20,9 +20,9 @@
 }
 
 window {
-    background-color: #22222280;
+    background-color: #22222250;
     border: 3px;
-    border-radius: 20px;
+    border-radius: 18px;
     border-color: c1;
 }
 
