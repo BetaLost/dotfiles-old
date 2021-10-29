@@ -6,11 +6,15 @@
 [[ $- != *i* ]] && return
 
 alias ls='ls --color=auto'
-PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 
+NC="\[\033[00m\]"
+
+PS1="\[\e[1;35m\]\u$NC:\[\033[1;29m\]\w\n\[\033[1;91m\]➜ $NC\[\033[1;99m\]"
+
+alias ':r'='source .bashrc'
 alias upd="sudo pacman -Syy"
 alias upg="sudo pacman -Syyu"
 ai() { sudo pacman -S $*; }
 ar() { sudo pacman -R $*; }
 
-(cat ~/.cache/wal/sequences &)
+#(cat ~/.cache/wal/sequences &)
