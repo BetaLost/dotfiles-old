@@ -28,6 +28,7 @@ local opacity = "85"
 local theme                                     = {}
 theme.dir                                       = "~/.config/awesome/themes/powerarrow"
 theme.font                                      = "Fira Sans Semibold 12"
+theme.wibar_border_width                        = dpi(3)
 theme.fg_normal                                 = "#FEFEFE"
 theme.fg_focus                                  = c3 
 theme.fg_urgent                                 = "#C83F11"
@@ -40,7 +41,7 @@ theme.tasklist_bg_focus                         = "#222222" .. opacity
 theme.tasklist_fg_focus                         = c3
 theme.border_width                              = dpi(2)
 theme.border_normal                             = "#3F3F3F"
-theme.border_focus                              = "#6F6F6F"
+theme.border_focus                              = c1
 theme.border_marked                             = "#CC9393"
 theme.titlebar_bg_focus                         = "#3F3F3F"
 theme.titlebar_bg_normal                        = "#3F3F3F"
@@ -228,7 +229,7 @@ end
 function theme.at_screen_connect(s)
     -- Quake application
     s.quake = lain.util.quake({ app = awful.util.terminal })
-
+ 
     -- Tags
     awful.tag(awful.util.tagnames, s, awful.layout.layouts)
 
