@@ -9,7 +9,7 @@ alias ls='ls --color=auto'
 
 NC="\[\033[00m\]"
 
-PS1="\[\e[1;35m\]\u$NC:\[\033[1;29m\]\w\n\[\033[1;91m\]➜ $NC\[\033[1;99m\]"
+PS1="\[\e[1;32m\]\u$NC:\[\033[1;29m\]\w\n\[\033[1;91m\]➜ $NC\[\033[1;99m\]"
 
 alias ':r'='source .bashrc'
 alias upd="sudo pacman -Syy"
