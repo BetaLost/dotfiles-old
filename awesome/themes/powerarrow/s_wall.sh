@@ -33,6 +33,6 @@ get_color 6
 
 rm $rofi_theme
 cp "$rofi_theme.base" $rofi_theme
-get_color 1 rofi
+get_color 3 rofi
 
 rm $theme_dir/colors.json

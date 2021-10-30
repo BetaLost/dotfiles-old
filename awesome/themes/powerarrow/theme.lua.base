@@ -255,6 +255,33 @@ function theme.at_screen_connect(s)
     -- Create a tasklist widget
     s.mytasklist = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, awful.util.tasklist_buttons)
 
+    -- local archicon = wibox {
+    -- visible = true,
+    -- bg = theme.bg_normal,
+    -- ontop = true,
+    -- height = dpi(22),
+    -- width = dpi(22),
+    -- border_width = dpi(3),
+    -- shape = function(cr, width, height)
+    --     gears.shape.rounded_rect(cr, width, height, 3)
+    -- end
+    -- }
+
+    -- archicon:setup {
+    -- {
+    --     {
+    --         image = theme.dir .. "/archlogo.png",
+    --         resize = true,
+    --         widget = wibox.widget.imagebox
+    --     },
+    --     margins = 1,
+    --     widget = wibox.container.margin
+    -- },
+    -- layout = wibox.layout.align.horizontal
+    -- } 
+ 
+    -- archicon:connect_signal("button::press", function(c) awful.spawn.with_shell("rofi -show drun") end)
+
     -- Create the wibox
     s.mywibox = awful.wibar({ position = "top", screen = s, height = dpi(22), bg = theme.bg_normal, fg = theme.fg_normal })
 
@@ -276,7 +303,7 @@ function theme.at_screen_connect(s)
             -- using separators
             -- arrow(theme.bg_normal, "#343434"),
             -- wibox.container.background(wibox.container.margin(task, dpi(3), dpi(7)), "#343434"),
-
+            
             -- CPU
             arrow(theme.bg_normal, color1),
             wibox.container.background(wibox.container.margin(wibox.widget { cpuicon, cpu.widget, layout = wibox.layout.align.horizontal }, dpi(3), dpi(3), dpi(3), dpi(3)), color1),
