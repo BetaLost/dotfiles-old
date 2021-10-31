@@ -17,4 +17,4 @@ alias upg="sudo pacman -Syyu"
 ai() { sudo pacman -S $*; }
 ar() { sudo pacman -R $*; }
 
-#(cat ~/.cache/wal/sequences &)
+(cat ~/.cache/wal/sequences &)
