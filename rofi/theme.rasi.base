@@ -5,13 +5,13 @@
     scrollbar: false;
 
     background-color: #22222250;
-    selected-normal-background: c1;
+    selected-normal-background: c3;
     selected-normal-foreground: #ffffff;
 
-    selected-urgent-background: c1;
+    selected-urgent-background: c3;
     selected-urgent-foreground: #ffffff;
 
-    selected-active-background: c1;
+    selected-active-background: c3;
     selected-active-foreground: #ffffff;
 
     normal-foreground: #ffffff;
@@ -23,7 +23,7 @@ window {
     background-color: #22222250;
     border: 3px;
     border-radius: 18px;
-    border-color: c1;
+    border-color: c3;
 }
 
 listview {
