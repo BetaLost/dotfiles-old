@@ -4,5 +4,4 @@ end
 
 set fish_greeting
 bind \t forward-word
-cat ~/.cache/wal/sequences &
 set -gx PATH "$HOME/.cargo/bin" $PATH;
