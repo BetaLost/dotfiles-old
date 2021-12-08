@@ -1,0 +1,242 @@
+[colors]
+background = #222
+background-alt = #444
+foreground = #dfdfdf
+foreground-alt = #555
+primary = #ffb52a
+secondary = #e60053
+alert = #bd2c40
+
+[bar/one]
+wm-restack = bspwm
+width = 13.5%
+height = 30
+offset-x = 1%
+radius = 6.0
+fixed-center = false
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 3
+line-color = #f00
+
+border-size = 4
+border-color = #00000000
+
+padding-left = 0
+padding-right = 0
+
+module-margin-left = 0
+module-margin-right = 0
+
+font-0 = JetBrainsMono Nerd Font Mono:style=Medium:pixelsize=22;1
+
+modules-center = bspwm
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+[bar/two]
+wm-restack = bspwm
+width = 20%
+height = 30
+offset-x = 15.5%
+radius = 5.0
+fixed-center = false
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 3
+line-color = #f00
+
+border-size = 4
+border-color = #00000000
+
+padding-left = 0
+padding-right = 2
+
+module-margin-left = 1
+module-margin-right = 2
+
+font-0 = Poppins:style=Semibold:pixelsize=14;1
+font-1 = JetBrainsMono Nerd Font Mono:style=Medium:pixelsize=20;1
+font-2 = JetBrainsMono Nerd Font Mono:style=Medium:pixelsize=14;1
+
+modules-center = pulseaudio cpu memory battery
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+[bar/three]
+wm-restack = bspwm
+width = 43%
+height = 30
+offset-x = 36.5%
+radius = 5.0
+fixed-center = false
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 3
+line-color = #f00
+
+border-size = 4
+border-color = #00000000
+
+padding-left = 0
+padding-right = 2
+
+module-margin-left = 1
+module-margin-right = 2
+
+font-0 = Poppins:style=Semibold:pixelsize=14;1
+
+modules-center = polywins
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+[bar/four]
+wm-restack = bspwm
+width = 18.5%
+height = 30
+offset-x = 80.5%
+radius = 5.0
+fixed-center = false
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 3
+line-color = #f00
+
+border-size = 4
+border-color = #00000000
+
+padding-left = 0
+padding-right = 2
+
+module-margin-left = 1
+module-margin-right = 2
+
+font-0 = Poppins:style=Semibold:pixelsize=14;1
+font-1 = JetBrainsMono Nerd Font Mono:style=Medium:pixelsize=20;1
+
+modules-center = date time
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+[module/bspwm]
+type = internal/bspwm
+
+ws-icon-0 = 1;
+ws-icon-1 = 2;
+ws-icon-2 = 3;
+ws-icon-3 = 4;
+ws-icon-4 = 5;
+
+label-focused = %icon% 
+label-focused-background =  #f50a4d
+label-focused-padding = 1
+
+label-occupied = %icon%
+label-occupied-padding = 1
+
+label-urgent = %icon%
+label-urgent-background = ${colors.alert}
+label-urgent-padding = 1
+
+label-empty = %icon%
+label-empty-foreground = ${colors.foreground-alt}
+label-empty-padding = 1
+
+[module/polywins]
+type = custom/script
+exec = ~/.config/polybar/scripts/polywins.sh 2>/dev/null
+format = <label>
+label = %output%
+label-padding = 1
+tail = true
+
+[module/cpu]
+type = internal/cpu
+interval = 2
+format-prefix = "  "
+format-prefix-foreground = ${colors.foreground-alt}
+format-underline = #f50a4d
+label = %percentage:2%%
+
+[module/memory]
+type = custom/script
+exec = ~/.config/polybar/scripts/memory.sh 2>/dev/null
+format = <label>
+format-prefix = "RAM "
+format-prefix-foreground = #666
+label = %output% MiB
+label-padding = 1
+format-underline = #f50a4d
+tail = true
+
+[module/date]
+type = internal/date
+interval = 5
+
+date = "%a, %d %B %Y"
+
+format-prefix = "  "
+format-prefix-foreground = #666
+format-underline = #f50a4d
+
+label = %date%
+
+[module/time]
+type = internal/date
+interval = 5
+
+date = "%a, %d %B %y"
+
+time = %H:%M
+
+format-prefix = "  "
+format-prefix-foreground = #666
+format-underline = #f50a4d
+
+label = %time%
+
+[module/pulseaudio]
+type = internal/pulseaudio
+
+format-volume = <label-volume>
+format-volume-prefix = " 墳  " 
+format-volume-foreground = #666
+label-volume = %percentage%%
+label-volume-foreground = ${root.foreground}
+format-volume-underline = #f50a4d
+
+label-muted = 婢  %percentage%%
+label-muted-foreground = #666
+
+[module/battery]
+type = custom/script
+exec = ~/.config/polybar/scripts/battery.sh 2>/dev/null
+format = <label>
+format-underline = #f50a4d
+label = %output%
+label-padding = 1
+tail = true
+
+[settings]
+screenchange-reload = true
+;compositing-background = xor
+;compositing-background = screen
+;compositing-foreground = source
+;compositing-border = over
+;pseudo-transparency = false
+
+[global/wm]
+margin-top = 5
+margin-bottom = 5

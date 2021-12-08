@@ -1,0 +1,48 @@
+#!/bin/sh
+
+# Make sure sxhkd is always running
+while :; do
+	if pgrep -x sxhkd > /dev/null; then
+		true
+	else
+		sxhkd &
+	fi
+	sleep 5
+done &
+
+# Make sure picom is always running
+while :; do
+	if pgrep -x picom > /dev/null; then
+		true
+	else
+		picom &
+	fi
+	sleep 5
+done &
+
+# Launch Polybar
+if pgrep -x polybar > /dev/null; then
+	killall polybar
+fi
+
+polybar one -q &
+polybar two -q &
+polybar three -q &
+polybar four -q &
+
+# Create workspaces
+#                   
+bspc monitor -d 1 2 3 4 5
+
+# Create gaps
+bspc config window_gap 10
+
+# Remove border
+bspc config border_width 0
+
+# Focus follows cursor
+bspc config focus_follows_pointer true
+
+# Set random wallpaper
+file=$(ls -1 $HOME/wallpapers/ | sort --random-sort | head -1)
+feh --bg-scale $HOME/wallpapers/$file
