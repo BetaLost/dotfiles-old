@@ -29,5 +29,5 @@ while :; do
 	fi
 	
 	echo "%{T3}%{F#666}$BAT_ICON%{F-}%{T-}  $CUR_BAT%"
-	sleep 5
+	sleep 15
 done
