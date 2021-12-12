@@ -3,11 +3,12 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'rust-lang/rust.vim'
 Plug 'lilydjwg/colorizer'
-Plug 'preservim/nerdtree'
 Plug 'jiangmiao/auto-pairs'
+Plug 'preservim/nerdtree'
 Plug 'dracula/vim', { 'name': 'dracula' }
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'fannheyward/coc-rust-analyzer'
+Plug 'vim-airline/vim-airline'
 
 call plug#end()
 
@@ -19,7 +20,6 @@ set signcolumn=no
 set pastetoggle=<F2>
 set number
 set ttimeoutlen=0
-inoremap <silent><expr> <TAB> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<TAB>"
 
 " Dracula Color Scheme
 colorscheme dracula
@@ -30,6 +30,12 @@ hi LineNr ctermbg=none
 " NERDTree
 nnoremap <C-t> :NERDTreeToggle<CR>
 nnoremap <C-f> :NERDTreeFind<CR>
+
+" CoC
+inoremap <silent><expr> <TAB> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<TAB>"
+
+" Vim-Airline
+let g:airline_powerline_fonts = 1
 
 " Shortcuts
 inoremap <C-@> <Esc>/<++><CR>"_c4l
