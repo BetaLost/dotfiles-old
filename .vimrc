@@ -1,33 +1,35 @@
-set shell=/bin/bash
-
 " Vim Plug
 call plug#begin('~/.vim/plugged')
 
 Plug 'rust-lang/rust.vim'
 Plug 'lilydjwg/colorizer'
+Plug 'preservim/nerdtree'
+Plug 'jiangmiao/auto-pairs'
+Plug 'dracula/vim', { 'name': 'dracula' }
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'fannheyward/coc-rust-analyzer'
 
 call plug#end()
 
 " General configuration
-filetype plugin indent on
+filetype indent on
 syntax on
 set ts=4 sw=4
 set signcolumn=no
+set pastetoggle=<F2>
+set number
+set ttimeoutlen=0
+inoremap <silent><expr> <TAB> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<TAB>"
 
-" Sublime Monokai Theme
-colorscheme sublimemonokai
+" Dracula Color Scheme
+colorscheme dracula
 hi Normal ctermbg=none
 hi NonText ctermbg=none
 hi LineNr ctermbg=none
 
-" Auto-close matching symbols
-inoremap { {}<Esc>ha
-inoremap ( ()<Esc>ha
-inoremap [ []<Esc>ha
-inoremap " ""<Esc>ha
-inoremap ' ''<Esc>ha
-inoremap ` ``<Esc>ha
-autocmd FileType html inoremap < <><Esc>ha
+" NERDTree
+nnoremap <C-t> :NERDTreeToggle<CR>
+nnoremap <C-f> :NERDTreeFind<CR>
 
 " Shortcuts
 inoremap <C-@> <Esc>/<++><CR>"_c4l
