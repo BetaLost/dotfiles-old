@@ -41,8 +41,12 @@ wgm() {
 	done
 }
 
+# Mounting NAS
+mns() { 
+	mkdir -p $HOME/shared/
+	sudo mount -t cifs -o username=$1,dir_mode=0777,file_mode=0777 //$2/$3 $HOME/shared/
+}
+
 # Plugins
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-
