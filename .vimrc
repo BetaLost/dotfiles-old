@@ -8,6 +8,7 @@ Plug 'preservim/nerdtree'
 Plug 'dracula/vim', { 'name': 'dracula' }
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'vim-airline/vim-airline'
+Plug 'bfrg/vim-cpp-modern'
 
 call plug#end()
 
@@ -31,7 +32,7 @@ nnoremap <C-t> :NERDTreeToggle<CR>
 nnoremap <C-f> :NERDTreeFind<CR>
 
 " CoC
-let g:coc_global_extensions=["coc-rust-analyzer", "coc-pyright"]
+let g:coc_global_extensions=["coc-rust-analyzer", "coc-clangd", "coc-pyright"]
 inoremap <silent><expr> <TAB> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<TAB>"
 
 " Vim-Airline
