@@ -49,18 +49,37 @@ mns() {
 		echo "Usage: mns (--options) SERVER_HOSTNAME SHARE_NAME"
 		echo ""
 		echo "options:"
-		echo "-h, --help   	Show this help message"
-		echo "-u, --username	Specify a username"
+		echo "-h, --help	 Show this help message"
+		echo "-u, --username	 Mount with a username"
+		echo "-m, --mount	 Mount without a username (guest/anonymous)"
+		echo "-n, --unmount	 Unmount the NAS"
 		echo ""
 		echo "Examples:"
-		echo "	mns -u myuser raspberrypi myshare"
-		echo "	mns raspberrypi myshare"
+		echo "	mns --username myuser 192.168.0.0 homeshare"
+		echo "	mns -m homeserver myshare"
+		echo "	mns -n"
 	elif [ "$1" = "-u" ] || [ "$1" = "--username" ]; then
 		mkdir -p $HOME/shared/
 		sudo mount -t cifs -o username=$2,dir_mode=0777,file_mode=0777 //$3/$4 $HOME/shared/
-	else
+	elif [ "$1" = "-m" ] || [ "$1" = "--mount" ]; then
 		mkdir -p $HOME/shared/
 		sudo mount -t cifs -o guest,dir_mode=0777,file_mode=0777 //$1/$2 $HOME/shared/
+	elif [ "$1" = "-n" ] || [ "$1" = "--unmount" ]; then
+		sudo umount $HOME/shared/
+		rmdir $HOME/shared/
+	else
+		echo "Usage: mns (--options) SERVER_HOSTNAME SHARE_NAME"
+		echo ""
+		echo "options:"
+		echo "-h, --help	 Show this help message"
+		echo "-u, --username	 Mount with a username"
+		echo "-m, --mount	 Mount without a username (guest/anonymous)"
+		echo "-n, --unmount	 Unmount the NAS"
+		echo ""
+		echo "Examples:"
+		echo "	mns --username myuser 192.168.0.0 homeshare"
+		echo "	mns -m homeserver myshare"
+		echo "	mns -n"
 	fi
 }
 
