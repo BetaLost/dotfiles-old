@@ -63,7 +63,7 @@ module-margin-right = 2
 font-0 = Poppins:style=Semibold:pixelsize=14;1
 font-1 = JetBrainsMono Nerd Font Mono:style=Medium:pixelsize=20;1
 
-modules-center = pulseaudio cpu memory
+modules-center = audio cpu memory
 
 cursor-click = pointer
 cursor-scroll = ns-resize
@@ -212,6 +212,14 @@ label-padding = 1
 format-underline = #f50a4d
 tail = true
 
+[module/audio]
+type = custom/script
+exec = ~/.config/polybar/scripts/audio.sh 2>/dev/null
+format = <label>
+label = %output%
+label-padding = 1
+tail = true
+
 [module/brightness]
 type = custom/script
 exec = ~/.config/polybar/scripts/brightness.sh 2>/dev/null
@@ -246,19 +254,6 @@ format-prefix-foreground = #666
 format-underline = #f50a4d
 
 label = %time%
-
-[module/pulseaudio]
-type = internal/pulseaudio
-
-format-volume = <label-volume>
-format-volume-prefix = " 墳  " 
-format-volume-foreground = #666
-label-volume = %percentage%%
-label-volume-foreground = ${root.foreground}
-format-volume-underline = #f50a4d
-
-label-muted = 婢  %percentage%%
-label-muted-foreground = #666
 
 [module/battery]
 type = custom/script
