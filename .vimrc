@@ -11,6 +11,8 @@ Plug 'rust-lang/rust.vim'
 Plug 'bfrg/vim-cpp-modern'
 Plug 'vim-python/python-syntax'
 Plug 'yuezk/vim-js'
+Plug 'mattn/emmet-vim'
+Plug 'alvan/vim-closetag'
 
 call plug#end()
 
@@ -34,8 +36,7 @@ nnoremap <C-t> :NERDTreeToggle<CR>
 nnoremap <C-f> :NERDTreeFind<CR>
 
 " CoC
-let g:coc_global_extensions=["coc-rust-analyzer", "coc-clangd", "coc-pyright", "coc-tsserver"]
-						   "      Rustlang             C++         Python        JavaScript
+let g:coc_global_extensions=["coc-rust-analyzer", "coc-clangd", "coc-pyright", "coc-tsserver", "coc-html", "coc-css"]
 inoremap <silent><expr> <TAB> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<TAB>"
 
 " Vim-Airline
