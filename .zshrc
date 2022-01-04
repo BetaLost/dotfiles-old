@@ -21,7 +21,7 @@ upd() { sudo pacman -Syy; }
 upg() { sudo pacman -Syu }
 sp() { pacman -Ss $*; }
 gp() { sudo pacman -S $*; }
-rp() { sudo pacman -R $*; }
+rp() { sudo pacman -Rs $*; }
 auri() {
 	for aurpkg in $@
 	do
