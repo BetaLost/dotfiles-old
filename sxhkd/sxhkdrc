@@ -12,7 +12,7 @@ XF86Audio{Raise,Lower}Volume
 
 # Audi mute
 XF86AudioMute
-	pulsemixer --toggle-mute
+	$HOME/.config/sxhkd/scripts/mute.sh
 
 # terminal emulator
 super + t 
@@ -117,4 +117,4 @@ super + {Left,Down,Up,Right}
 
 # Move a tiled window
 super + shift + {Left,Down,Up,Right}
-	$HOME/.config/sxhkd/move_window.sh {west,south,north,east}
+	$HOME/.config/sxhkd/scripts/move_window.sh {west,south,north,east}
