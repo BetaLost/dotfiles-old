@@ -83,6 +83,51 @@ mns() {
 	fi
 }
 
+# Mount Microsoft Windows Partition
+mwp() {
+	if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
+		echo "Usage: mwp (--options) /dev/sdXX"
+		echo ""
+		echo "options:"
+		echo "-h, --help	 Show this help message"
+		echo "-m, --mount	 Mount partition"
+		echo "-n, --unmount	 Unmount the partition"
+		echo ""
+		echo "Examples:"
+		echo "	mwp -m /dev/sda3"
+		echo "	mwp --unmount"
+	elif [ "$1" = "-m" ] || [ "$1" = "--mount" ]; then
+		sudo mkdir -p /mnt/MSW/
+		sudo mount $2 /mnt/MSW/
+		cd /mnt/MSW/
+	elif [ "$1" = "-n" ] || [ "$1" = "--unmount" ]; then
+		cd $HOME/
+		sudo umount /mnt/MSW/
+		sudo rmdir /mnt/MSW/
+	else
+		echo "Usage: mwp (--options) /dev/sdXX"
+		echo ""
+		echo "options:"
+		echo "-h, --help	 Show this help message"
+		echo "-m, --mount	 Mount partition"
+		echo "-n, --unmount	 Unmount the partition"
+		echo ""
+		echo "Examples:"
+		echo "	mwp -m /dev/sda3"
+		echo "	mwp --unmount"
+	fi
+}
+
+# Encrypt data
+sef() {
+	gpg --symmetric --no-symkey-cache --cipher-algo AES256 $1
+}
+
+# Decrypt data
+sdf() {
+	gpg --output ${1%.gpg} --decrypt --no-symkey-cache $1
+}
+
 # Compile and run any cpp files in current directory
 cr() {
 	for file in *.cpp; do g++ $file -o "${file%.cpp}"; done
