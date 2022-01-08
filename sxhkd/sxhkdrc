@@ -24,7 +24,7 @@ super + r
 
 # Web Browser
 super + b
-	firefox	
+	brave
 
 # make sxhkd reload its configuration files:
 super + Escape
