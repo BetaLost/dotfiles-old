@@ -10,10 +10,11 @@ setopt appendhistory
 # setopt SHARE_HISTORY
 
 # Aliases
-alias ls='exa -l'
+alias ls="exa -l"
+alias nf="nerdfetch"
 
 # Key bindings
-bindkey '^[[Z' end-of-line 
+bindkey "^[[Z" end-of-line 
 bindkey ";5C" forward-word
 bindkey ";5D" backward-word
 
