@@ -21,7 +21,7 @@ while :; do
 done &
 
 # Launch Polybar
-bash run_polybar &
+bash $HOME/.config/bspwm/run_polybar &
 
 # Create workspaces
 #                   
