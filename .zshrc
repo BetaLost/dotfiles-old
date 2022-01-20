@@ -12,6 +12,7 @@ setopt appendhistory
 # Aliases
 alias ls="exa -l"
 alias nf="nerdfetch"
+alias rconf="source $HOME/.zshrc"
 
 # Key bindings
 bindkey "^[[Z" end-of-line 
@@ -19,11 +20,14 @@ bindkey ";5C" forward-word
 bindkey ";5D" backward-word
 
 # Interacting with packages
-upd() { sudo pacman -Syy; }
-upg() { sudo pacman -Syu }
+alias upd="sudo pacman -Syy"
+alias upg="sudo pacman -Syu"
+alias autor="sudo pacman -Rsn $(pacman -Qdtq)" 
+
 sp() { pacman -Ss $*; }
 gp() { sudo pacman -S $*; }
 rp() { sudo pacman -Rs $*; }
+
 auri() {
 	for aurpkg in $@
 	do
@@ -57,7 +61,7 @@ mns() {
 		echo "-n, --unmount	 Unmount the NAS"
 		echo ""
 		echo "Examples:"
-		echo "	mns --username myuser 192.168.0.0 homeshare"
+		echo "	mns --username myusername 192.168.0.159 homeshare"
 		echo "	mns -m homeserver myshare"
 		echo "	mns -n"
 	elif [ "$1" = "-u" ] || [ "$1" = "--username" ]; then
@@ -79,7 +83,7 @@ mns() {
 		echo "-n, --unmount	 Unmount the NAS"
 		echo ""
 		echo "Examples:"
-		echo "	mns --username myuser 192.168.0.0 homeshare"
+		echo "	mns --username myusername 192.168.0.159 homeshare"
 		echo "	mns -m homeserver myshare"
 		echo "	mns -n"
 	fi
@@ -129,6 +133,9 @@ sef() {
 sdf() {
 	gpg --output ${1%.gpg} --decrypt --no-symkey-cache $1
 }
+
+# Get IP Address
+getip() { ip -o -4 addr list $1 | awk '{print $4}' | cut -d / -f 1 }
 
 # Compile and run any cpp files in current directory
 cr() {
