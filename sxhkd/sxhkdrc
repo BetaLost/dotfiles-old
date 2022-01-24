@@ -10,13 +10,17 @@ XF86MonBrightness{Up,Down}
 XF86Audio{Raise,Lower}Volume
 	pulsemixer --change-volume {+,-}1
 
-# Audi mute
+# Audio mute
 XF86AudioMute
 	$HOME/.config/sxhkd/scripts/mute.sh
 
+# Toggle Keyboard Layout
+super + l
+	(setxkbmap -query | grep -q "layout:\s\+us") && setxkbmap ar || setxkbmap us
+
 # terminal emulator
 super + t 
-	kitty	
+	kitty
 
 # program launcher
 super + r
