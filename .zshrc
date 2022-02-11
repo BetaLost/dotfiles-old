@@ -13,6 +13,7 @@ setopt appendhistory
 alias ls="exa -l"
 alias nf="nerdfetch"
 alias rconf="source $HOME/.zshrc"
+alias cb="bluetoothctl power on; bluetoothctl agent on; bluetoothctl default-agent; bluetoothctl connect C3:EA:FB:2B:AF:4B"
 
 # Key bindings
 bindkey "^[[Z" end-of-line 
@@ -22,11 +23,10 @@ bindkey ";5D" backward-word
 # Interacting with packages
 alias upd="sudo pacman -Syy"
 alias upg="sudo pacman -Syu"
-alias autor="sudo pacman -Rsn $(pacman -Qdtq)" 
-
-sp() { pacman -Ss $*; }
-gp() { sudo pacman -S $*; }
-rp() { sudo pacman -Rs $*; }
+alias purge="sudo pacman -Rsn $(pacman -Qdtq)" 
+alias sp="pacman -Ss"
+alias gp="sudo pacman -S"
+alias rp="sudo pacman -Rs"
 
 auri() {
 	for aurpkg in $@
