@@ -12,7 +12,7 @@ XF86Audio{Raise,Lower}Volume
 
 # Audio mute
 XF86AudioMute
-	$HOME/.config/sxhkd/scripts/mute.sh
+	$HOME/.config/sxhkd/scripts/mute
 
 # Toggle Keyboard Layout
 super + l
@@ -121,4 +121,4 @@ super + {Left,Down,Up,Right}
 
 # Move a tiled window
 super + shift + {Left,Down,Up,Right}
-	$HOME/.config/sxhkd/scripts/move_window.sh {west,south,north,east}
+	$HOME/.config/sxhkd/scripts/move_window {west,south,north,east}
